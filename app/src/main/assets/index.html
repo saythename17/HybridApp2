@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <META charset="utf-8">
+<!--        부트스트랩 css 적용     -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+<!--        script-->
+        <script>
+            //-----Native Android에서 호출할 함수-------
+            function setReceivedMSG(msg){//msg - 파라미터로 전달받은 메세지 값
+                document.getElementById('msg').innerHTML=msg
+            }
+
+            //-----Native JAVA 에 메세지를 보내는 함수------
+            function sendMSG(){
+                //input 요소에 있는 메세지 가져오기
+                var msg=document.getElementById('in1').value
+
+                //안드로이드에서 연결자로 만든 객체 호출
+                //안드로이드에서 연결하여 이미 문서내에 존재
+                window.Connector.setText(msg);//최상위객체[window.] 생략 가능
+            }
+
+
+            //------Native Java 와 연결하여 갤러리 앱 여는 함수----
+            function openGallery(){
+                Connector.openGallery()
+            }
+        </script>
+    </head>
+    <body>
+        <div class="container mt-3">
+            <h5>Native Java로 보낼 메세지</h5>
+            <input id="in1" type="text" placeholder="input massage"
+            class="form-control mt-3">
+            <button onclick="sendMSG()" class="btn btn-primary btn-block mt-3">send message to Native Java</button>
+
+            <h5 class="mt-5">Native Android로 부터 받은 메세지</h5>
+            <h6 id="msg" class="mt-3">waiting for message . . .</h6>
+
+            <button onclick="openGallery()" class="btn btn-success btn-block mt-5">open Gallery</button>
+        </div>
+    </body>
+</html>
